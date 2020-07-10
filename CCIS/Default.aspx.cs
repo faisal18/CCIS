@@ -63,6 +63,8 @@ namespace CCIS
 
                 List<Entities.CallerInformation> ep = new List<Entities.CallerInformation>();
 
+
+
                 ep = DAL.Operations.OpCallerInfo.GetCallerInformationbyLicenseID(PayerCodes);
                 //  DataRow[]  dr = dc.CallerInformationbyLicenseID.Tables[0].Select("Name like '%"+PayerCodes+"%'"); 
 
