@@ -1,0 +1,390 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="CCIS.SiteMaster" %>
+
+<%@ Register Src="~/UIComponents/UserControl/AllSearch.ascx" TagPrefix="uc1" TagName="AllSearch" %>
+
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head runat="server">
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%: Page.Title %> - IQService Desk</title>
+
+    <asp:PlaceHolder runat="server">
+        <%: Scripts.Render("~/bundles/modernizr") %>
+    </asp:PlaceHolder>
+
+    <webopt:BundleReference runat="server" Path="~/Content/css" />
+    <%--glyphicon glyphicon-play-circle--%>
+    <%--<link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />--%>
+    <link href="Images/favicon.png" rel="shortcut icon" type="image/x-icon" />
+
+    <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/jquery-2.1.1.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
+
+    <%-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<link href="http://automation.dimensions-healthcare.com/CCIS/Content/Jquery-UI.css" rel="stylesheet" type="text/css" />
+<link href="http://automation.dimensions-healthcare.com/CCIS/Content/bootstrap-theme.css" rel="stylesheet" type="text/css" />--%>
+
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css" rel="stylesheet" />
+
+
+    <style>
+        .navbar-global {
+            background-color: #e1e1e1;
+        }
+
+            .navbar-global .navbar-brand {
+                color: white;
+            }
+
+            .navbar-global .navbar-user > li > a {
+                color: white;
+            }
+
+        .navbar-primary {
+            margin-top: 0.2%;
+            background-color: #1B1A47;
+            bottom: 0px;
+            left: 0px;
+            position: fixed;
+            top: 6%;
+            height: 100%;
+            width: 12%;
+            z-index: 8;
+            overflow: hidden;
+            -webkit-transition: all 0.1s ease-in-out;
+            -moz-transition: all 0.1s ease-in-out;
+            transition: all 0.1s ease-in-out;
+        }
+
+            .navbar-primary.collapsed {
+                width: 4%;
+            }
+
+                .navbar-primary.collapsed .glyphicon {
+                    font-size: 22px;
+                }
+
+                .navbar-primary.collapsed .nav-label {
+                    display: none;
+                }
+
+        .btn-expand-collapse {
+            position: absolute;
+            display: block;
+            left: 0px;
+            top: 0;
+            width: 100%;
+            padding: 8px 0;
+            border-bottom: solid 0px #666;
+            color: grey;
+            font-size: 20px;
+            text-align: center;
+        }
+
+            .btn-expand-collapse:hover,
+            .btn-expand-collapse:focus {
+                /*background-color: #e1e1e1;*/
+                color: white;
+            }
+
+            .btn-expand-collapse:active {
+                background-color: #111;
+            }
+
+        .navbar-primary-menu {
+            position: absolute;
+            top: 50px;
+            width: 100%;
+        }
+
+            .navbar-primary-menu,
+            .navbar-primary-menu li {
+                margin: 0;
+                padding: 0;
+                padding-left: 2%;
+                padding-right: 2%;
+                list-style: none;
+            }
+
+        .navbar-inverse {
+            background-color: white !important;
+            background-image: none !important;
+            /*border: none !important;*/
+            /*border-bottom: solid 1px #000 !important;*/
+        }
+
+            .navbar-inverse .navbar-brand, .navbar-nav > li > a {
+                color: #000 !important;
+            }
+
+        .navbar-primary-menu li a {
+            display: block;
+            padding: 10px 18px;
+            text-align: left;
+            border-bottom: solid 1px #444;
+            color: #B5BFC7;
+        }
+
+            .navbar-primary-menu li a:hover {
+                text-decoration: none;
+                color: white;
+            }
+
+            .navbar-primary-menu li a:active {
+                border-left-color: #4b89dc;
+                border-left: 3px;
+                border-left-style: solid;
+            }
+
+            .navbar-primary-menu li a .glyphicon {
+                margin-right: 6px;
+                /*background-color: #e1e1e1;*/
+            }
+
+            .navbar-primary-menu li a:hover .glyphicon {
+                color: #e1e1e1;
+                /*background-color: #e1e1e1;*/
+            }
+
+        .container {
+            /*margin-left: 15%;*/
+            margin: auto;
+        }
+
+        .jumbotron {
+            background-color: aliceblue !important;
+            padding-right: 5%;
+            padding-left: 5%;
+            /*background:transparent !important;*/
+        }
+
+
+        .rotate-image {
+            transform: rotate(180deg);
+        }
+
+        .crossRotate {
+            -webkit-transition-duration: 1s;
+            -moz-transition-duration: 1s;
+            -o-transition-duration: 1s;
+            transition-duration: 1s;
+            -webkit-transition-property: -webkit-transform;
+            -moz-transition-property: -moz-transform;
+            -o-transition-property: -o-transform;
+            transition-property: transform;
+            outline: 0;
+        }
+
+            /*.crossRotate:focus {
+                -webkit-transform: rotate(180deg);
+                -ms-transform: rotate(180deg);
+                transform: rotate(180deg);
+            }*/
+            .crossRotate.active {
+                /* vendor-prefixes here... */
+                transform: rotate(180deg);
+            }
+    </style>
+
+</head>
+<body>
+    <form runat="server">
+        <asp:ScriptManager runat="server">
+            <Scripts>
+                <%--To learn more about bundling scripts in ScriptManager see https://go.microsoft.com/fwlink/?LinkID=301884 --%>
+                <%--Framework Scripts--%>
+                <asp:ScriptReference Name="MsAjaxBundle" />
+                <asp:ScriptReference Name="jquery" />
+                <asp:ScriptReference Name="bootstrap" />
+                <asp:ScriptReference Name="WebForms.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebForms.js" />
+                <asp:ScriptReference Name="WebUIValidation.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebUIValidation.js" />
+                <asp:ScriptReference Name="MenuStandards.js" Assembly="System.Web" Path="~/Scripts/WebForms/MenuStandards.js" />
+                <asp:ScriptReference Name="GridView.js" Assembly="System.Web" Path="~/Scripts/WebForms/GridView.js" />
+                <asp:ScriptReference Name="DetailsView.js" Assembly="System.Web" Path="~/Scripts/WebForms/DetailsView.js" />
+                <asp:ScriptReference Name="TreeView.js" Assembly="System.Web" Path="~/Scripts/WebForms/TreeView.js" />
+                <asp:ScriptReference Name="WebParts.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebParts.js" />
+                <asp:ScriptReference Name="Focus.js" Assembly="System.Web" Path="~/Scripts/WebForms/Focus.js" />
+                <asp:ScriptReference Name="WebFormsBundle" />
+                <%--Site Scripts--%>
+            </Scripts>
+        </asp:ScriptManager>
+
+        <asp:Panel runat="server" ID="pnl_topbar" Visible="false">
+            <nav class="navbar navbar-inverse navbar-global navbar-fixed-top">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <asp:Image ImageUrl="~/Content/IQVIA_Service_Desk_Logo_v1.0.png" runat="server" Height="46px" Width="205px" />
+
+                        <%-- <a class="navbar-brand" href="#"><span class="glyphicon glyphicon-phone-alt" style="padding-right: 5px;"></span>
+                            IQ ServiceDesk
+                        </a>--%>
+                    </div>
+                    <div id="navbar" class="collapse navbar-collapse">
+                        <ul class="nav navbar-nav navbar-user navbar-right">
+                            <li class="login" style="padding: 5px;">
+                                <asp:Panel runat="server" ID="pnl_user" Visible="false">
+                                    <asp:LinkButton runat="server" ID="link_user" OnClick="link_user_Click">
+                                        <span style="padding: 2px" class="glyphicon glyphicon-user"></span>
+                                        <asp:Label runat="server" ID="lbl_username"></asp:Label>
+                                    </asp:LinkButton>
+                                </asp:Panel>
+                            </li>
+
+                            <li class="login" style="padding: 5px;">
+                                <asp:Panel runat="server" ID="pnl_logout" Visible="false">
+                                    <asp:LinkButton runat="server" ID="link_logout" OnClick="link_logout_Click" Text="Logout">
+                                    <span style="padding:2px" class="glyphicon glyphicon-log-out"></span>Logout
+                                    </asp:LinkButton>
+                                </asp:Panel>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <nav class="navbar-primary">
+                <a href="#" class="btn-expand-collapse crossRotate"><span id="navIcon" class="glyphicon glyphicon-menu-left"></span></a>
+                <asp:Panel ID="pnl_admin" runat="server" Visible="true">
+                    <ul class="navbar-primary-menu">
+                        <li>
+                            <a runat="server" href="~/UIComponents/CallerInformation.aspx"><span class="glyphicon glyphicon-earphone"></span><span class="nav-label">Caller Info</span></a>
+                            <a runat="server" href="~/UIComponents/Ticket/ListTickets.aspx"><span class="glyphicon glyphicon-list-alt"></span><span class="nav-label">List Ticket</span></a>
+                            <a runat="server" href="~/UIComponents/Admin/AdminControl.aspx"><span class="glyphicon glyphicon-cog"></span><span class="nav-label">Admin Access</span></a>
+                            <a runat="server" href="~/UIComponents/KB_Repo/KBRepository.aspx"><span class="glyphicon glyphicon-book"></span><span class="nav-label">Knowledge Base</span></a>
+
+                            <%--<a runat="server" href="~/UIComponents/Notification/TicketsReport.aspx"><span class="glyphicon glyphicon-play-circle"></span><span class="nav-label">Ticket report</span></a>--%>
+                            <a runat="server" href="http://automation.dimensions-healthcare.com/IQServiceDeskReporting/UIComponents/User/Login.aspx"><span class="glyphicon glyphicon-play-circle"></span><span class="nav-label">Ticket report</span></a>
+
+
+                            <a runat="server" href="~/UIComponents/KPI/Application.aspx"><span class="glyphicon glyphicon-dashboard"></span><span class="nav-label">Application</span></a>
+                            <a runat="server" href="~/UIComponents/Ticket/L2/L2_TicketQueue.aspx"><span class="glyphicon glyphicon-dashboard"></span><span class="nav-label">L2 Queue</span></a>
+                            <a runat="server" href="~/UIComponents/Notification/NotificationList.aspx"><span class="glyphicon glyphicon-fast-forward"></span><span class="nav-label">Notification List</span></a>
+
+                        </li>
+                    </ul>
+
+                </asp:Panel>
+
+                <asp:Panel ID="pnl_l1" runat="server" Visible="true">
+                    <ul class="navbar-primary-menu">
+                        <li>
+                            <a runat="server" href="~/UIComponents/CallerInformation.aspx"><span class="glyphicon glyphicon-earphone"></span><span class="nav-label">Caller Info</span></a>
+                            <a runat="server" href="~/UIComponents/Ticket/ListTickets.aspx"><span class="glyphicon glyphicon-list-alt"></span><span class="nav-label">List Ticket</span></a>
+                            <a runat="server" href="~/UIComponents/KB_Repo/KBRepository.aspx"><span class="glyphicon glyphicon-book"></span><span class="nav-label">Knowledge Base</span></a>
+                            <%--<a runat="server" href="~/UIComponents/Notification/TicketsReport.aspx"><span class="glyphicon glyphicon-play-circle"></span><span class="nav-label">Ticket report</span></a>--%>
+                            <a runat="server" href="~/UIComponents/Notification/NotificationList.aspx"><span class="glyphicon glyphicon-fast-forward"></span><span class="nav-label">Notification List</span></a>
+                        </li>
+                    </ul>
+
+                </asp:Panel>
+
+                <asp:Panel ID="pnl_l2" runat="server" Visible="true">
+                    <ul class="navbar-primary-menu">
+                        <li>
+                            <a runat="server" href="~/UIComponents/Ticket/ListTickets.aspx"><span class="glyphicon glyphicon-list-alt"></span><span class="nav-label">List Ticket</span></a>
+                            <a runat="server" href="~/UIComponents/KB_Repo/KBRepository.aspx"><span class="glyphicon glyphicon-book"></span><span class="nav-label">Knowledge Base</span></a>
+                            <%--<a runat="server" href="~/UIComponents/Notification/TicketsReport.aspx"><span class="glyphicon glyphicon-play-circle"></span><span class="nav-label">Ticket report</span></a>--%>
+                            <a runat="server" href="~/UIComponents/KPI/Application.aspx"><span class="glyphicon glyphicon-dashboard"></span><span class="nav-label">Application</span></a>
+                            <a runat="server" href="~/UIComponents/Ticket/L2/L2_TicketQueue.aspx"><span class="glyphicon glyphicon-dashboard"></span><span class="nav-label">L2 Queue</span></a>
+                            <a runat="server" href="~/UIComponents/Notification/NotificationList.aspx"><span class="glyphicon glyphicon-fast-forward"></span><span class="nav-label">Notification List</span></a>
+                        </li>
+                    </ul>
+
+                </asp:Panel>
+                
+                <asp:Panel ID="pnl_l3" runat="server" Visible="true">
+                    <ul class="navbar-primary-menu">
+                        <li>
+                            <a runat="server" href="~/UIComponents/Ticket/ListTickets.aspx"><span class="glyphicon glyphicon-list-alt"></span><span class="nav-label">List Ticket</span></a>
+                            <%--<a runat="server" href="~/UIComponents/KB_Repo/KBRepository.aspx"><span class="glyphicon glyphicon-book"></span><span class="nav-label">Knowledge Base</span></a>--%>
+                            <%--<a runat="server" href="~/UIComponents/Notification/TicketsReport.aspx"><span class="glyphicon glyphicon-play-circle"></span><span class="nav-label">Ticket report</span></a>--%>
+                            <%--<a runat="server" href="~/UIComponents/KPI/Application.aspx"><span class="glyphicon glyphicon-dashboard"></span><span class="nav-label">Application</span></a>--%>
+                            <%--<a runat="server" href="~/UIComponents/Ticket/L2/L2_TicketQueue.aspx"><span class="glyphicon glyphicon-dashboard"></span><span class="nav-label">L2 Queue</span></a>--%>
+                        </li>
+                    </ul>
+
+                </asp:Panel>
+
+                <asp:Panel ID="pnl_Business" runat="server" Visible="true">
+                    <ul class="navbar-primary-menu">
+                        <li>
+                            <a runat="server" href="~/UIComponents/Ticket/ListTickets.aspx"><span class="glyphicon glyphicon-list-alt"></span><span class="nav-label">List Ticket</span></a>
+                            <%--<a runat="server" href="~/UIComponents/Notification/TicketsReport.aspx"><span class="glyphicon glyphicon-play-circle"></span><span class="nav-label">Ticket report</span></a>--%>
+                            <a runat="server" href="http://automation.dimensions-healthcare.com/IQServiceDeskReporting/UIComponents/User/Login.aspx"><span class="glyphicon glyphicon-play-circle"></span><span class="nav-label">Ticket report</span></a>
+
+                        </li>
+                    </ul>
+
+                </asp:Panel>
+
+
+            </nav>
+        </asp:Panel>
+
+        <div id="mainBody" class="container body-content">
+            <asp:ContentPlaceHolder ID="MainContent" runat="server">
+            </asp:ContentPlaceHolder>
+            <hr />
+            <footer>
+                <p>&copy; <%: DateTime.Now.Year %> - IQVIA </p>
+
+                <div id="UserSession">
+                    <ul class="nav navbar-nav navbar-user navbar-left">
+                    </ul>
+                </div>
+
+            </footer>
+        </div>
+
+        <%-- <div class="container body-content">
+            <hr />
+            <footer>
+                <p>&copy; <%: DateTime.Now.Year %> - Dimensions HealthCare - IQVIA </p>
+
+                <div id="UserSession">
+                    <ul class="nav navbar-nav navbar-user navbar-left">
+                    </ul>
+                </div>
+
+            </footer>
+        </div>--%>
+    </form>
+
+    <%--    <script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>
+    <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js'></script>--%>
+    <script>
+        $('.btn-expand-collapse').click(function (e) {
+
+            $('.navbar-primary').toggleClass('collapsed');
+            $('.collapse').toggleClass('in').toggleClass('hidden-xs').toggleClass('visible-xs');
+            if (document.getElementById("mainBody").style.marginLeft == "5%") {
+                document.getElementById("mainBody").style.marginLeft = "auto";
+            } else {
+                document.getElementById("mainBody").style.marginLeft = "5%";
+            }
+        });
+
+        $('.crossRotate').on('click', function () {
+            $(this).toggleClass('active');
+        });
+    </script>
+</body>
+</html>
+

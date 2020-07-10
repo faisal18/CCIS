@@ -1,0 +1,155 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{CDD3B283-5C82-4E4F-9B88-A3E6ABC7671F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DAL</RootNamespace>
+    <AssemblyName>DAL</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DataModel\DbContext.cs" />
+    <Compile Include="DataModel\GenericRepository.cs" />
+    <Compile Include="DataModel\IGenericRepository.cs" />
+    <Compile Include="DataModel\MaintenanceLoggingRepository.cs" />
+    <Compile Include="DataModel\MRPersonalInformationRepository.cs" />
+    <Compile Include="DataModel\AddressLocationsRepository.cs" />
+    <Compile Include="DataModel\ProviderTypeRepository.cs" />
+    <Compile Include="DataModel\PayerTypeRepository.cs" />
+    <Compile Include="DataModel\NationalityRepository.cs" />
+    <Compile Include="DataModel\PayersRepository.cs" />
+    <Compile Include="DataModel\UOW.cs" />
+    <Compile Include="Helper\DatasetToEntity.cs" />
+    <Compile Include="Helper\DateTimeHelper.cs" />
+    <Compile Include="Helper\EmailHelper.cs" />
+    <Compile Include="Helper\ListToDataset.cs" />
+    <Compile Include="Helper\Logger.cs" />
+    <Compile Include="Helper\MemberHashCode.cs" />
+    <Compile Include="Helper\Member_Hashing.cs" />
+    <Compile Include="Helper\ObjectCompare.cs" />
+    <Compile Include="Jira\JiraAssignee.cs" />
+    <Compile Include="Jira\JiraAttachments.cs" />
+    <Compile Include="Jira\JiraComments.cs" />
+    <Compile Include="Jira\JiraComponent.cs" />
+    <Compile Include="Jira\JiraPriority.cs" />
+    <Compile Include="Jira\JiraProjects.cs" />
+    <Compile Include="Jira\JiraResolution.cs" />
+    <Compile Include="Jira\JiraStatuses.cs" />
+    <Compile Include="Jira\JiraSynch.cs" />
+    <Compile Include="Jira\JiraTicket.cs" />
+    <Compile Include="Jira\JiraTicketType.cs" />
+    <Compile Include="Jira\JiraUsers.cs" />
+    <Compile Include="Jira\JiraVersion.cs" />
+    <Compile Include="Jira\Rest_API.cs" />
+    <Compile Include="Helper\XMLHelper.cs" />
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Operations\OpApplicationProps.cs" />
+    <Compile Include="Operations\OpEmail.cs" />
+    <Compile Include="Operations\OpActionsExecution.cs" />
+    <Compile Include="Operations\OpJiraTicket.cs" />
+    <Compile Include="Operations\OpJiraTicketComments.cs" />
+    <Compile Include="Operations\OpLookups.cs" />
+    <Compile Include="Operations\OpReports.cs" />
+    <Compile Include="Operations\OpResolution.cs" />
+    <Compile Include="Operations\OpTicketApplicationProps.cs" />
+    <Compile Include="Operations\OpTicketRelation.cs" />
+    <Compile Include="Operations\OpTickets.cs" />
+    <Compile Include="Operations\OpUserRoles.cs" />
+    <Compile Include="Operations\OpUserGroups.cs" />
+    <Compile Include="Operations\OpUserApplication.cs" />
+    <Compile Include="Operations\OpTicketInformation.cs" />
+    <Compile Include="Operations\OpTicketHistory.cs" />
+    <Compile Include="Operations\OpTicketAttachment.cs" />
+    <Compile Include="Operations\OpSystemUser.cs" />
+    <Compile Include="Operations\OpStatuses.cs" />
+    <Compile Include="Operations\OpSLAExecutionLog.cs" />
+    <Compile Include="Operations\OpSLADeclarations.cs" />
+    <Compile Include="Operations\OpRoles.cs" />
+    <Compile Include="Operations\OpNotifications.cs" />
+    <Compile Include="Operations\OpItemTypes.cs" />
+    <Compile Include="Operations\OpGroups.cs" />
+    <Compile Include="Operations\OpInquiryDetails.cs" />
+    <Compile Include="Operations\OpApplications.cs" />
+    <Compile Include="Operations\OpProviders.cs" />
+    <Compile Include="Operations\OpMaintenanceLogger.cs" />
+    <Compile Include="Operations\OpPersonInformation.cs" />
+    <Compile Include="Operations\OpAddressLocations.cs" />
+    <Compile Include="Operations\OpCallerInfo.cs" />
+    <Compile Include="Operations\OpProviderType.cs" />
+    <Compile Include="Operations\OpPayerType.cs" />
+    <Compile Include="Operations\OpNationality.cs" />
+    <Compile Include="Operations\OpPayers.cs" />
+    <Compile Include="Operations\OpSearch.cs" />
+    <Compile Include="Startup.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Log4Net.config">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Entities\Entities.csproj">
+      <Project>{6212facd-1e02-4ec8-88e9-8bfcf2cc01a4}</Project>
+      <Name>Entities</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="SynchronisationScripts\SyncPayers_with_LMU.sql" />
+    <Content Include="SynchronisationScripts\SyncProviders_with_LMU.sql" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
