@@ -941,7 +941,7 @@ namespace DAL.Operations
         {
             try
             {
-                List<Entities.TicketHistory> ticketHistories = _TicketHistoryList.Where(a => a.Activity.ToUpper().Contains("ASSIGN")).ToList();
+                List<Entities.TicketHistory> ticketHistories = _TicketHistoryList.Where(a => a.Activity.ToUpper().Contains("ASSIGNED TO")).ToList();
                 Entities.TicketHistory _TicketHistoryMax = new TicketHistory();
 
                 if (ticketHistories.Count > 0)

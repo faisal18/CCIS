@@ -170,7 +170,7 @@ namespace CCIS.UIComponents.Notification
                 foreach (int TI_ID in TicketInformationIDs)
                 {
 
-                    //if (TI_ID != 22279)
+                    //if (TI_ID != 24761)
                     //{
                     //    continue;
                     //}
@@ -263,7 +263,8 @@ namespace CCIS.UIComponents.Notification
 
 
 
-                        if (obj.SLATime < 0)
+
+                        if (obj.SLATime <= 0)
                         {
                             if (is_closed(TicketStatus))
                             {
@@ -288,7 +289,7 @@ namespace CCIS.UIComponents.Notification
                         //OLAMinutes = SLAMinutes;
                         //OLATime = DAL.Helper.DateTimeHelper.SLACalculations(ApplicationName, OLAMinutes, Priority, assignedGroup, "OLA");
 
-                        if (obj.OLATime < 0)
+                        if (obj.OLATime <= 0)
                         {
                             if (is_closed(TicketStatus))
                             {
